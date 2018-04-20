@@ -20,6 +20,9 @@ public class PlayerLife : MonoBehaviour {
 	[SerializeField]
 	private GameObject playerLivesGrid;
 
+	[SerializeField]
+	private GameObject gameOverPanel;
+
 	void Start() {
 //		GameObject playerLivesGrid = GameObject.Find ("PlayerLivesGrid");
 
@@ -38,6 +41,7 @@ public class PlayerLife : MonoBehaviour {
 			this.lifeImages.RemoveAt (this.lifeImages.Count - 1);
 			if (this.numberOfLives == 0) {
 				Destroy (this.gameObject);
+				this.gameOverPanel.SetActive (true);
 			}
 			this.isInvulnerable = true;
 			Invoke ("BecomeVulnerable", this.invulnerabilityDuration); 
