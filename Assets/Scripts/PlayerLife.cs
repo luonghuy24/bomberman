@@ -28,8 +28,8 @@ public class PlayerLife : NetworkBehaviour {
 			this.initialPosition = this.transform.position;
 			this.initialNumberOfLives = this.numberOfLives;
 
-//			this.gameOverPanel = GameObject.Find ("GameOverPanel");
-//			this.gameOverPanel.SetActive (false);
+			this.gameOverPanel = GameObject.Find ("GameOverPanel");
+			this.gameOverPanel.SetActive (false);
 
 			GameObject playerLivesGrid = GameObject.Find ("PlayerLivesGrid");
 
@@ -48,7 +48,8 @@ public class PlayerLife : NetworkBehaviour {
 			Destroy (lifeImage);
 			this.lifeImages.RemoveAt (this.lifeImages.Count - 1);
 			if (this.numberOfLives == 0) {
-				Respawn ();
+				//Respawn ();
+				DisplayGameOver ();
 			}
 			this.isInvulnerable = true;
 			Invoke ("BecomeVulnerable", this.invulnerabilityDuration); 
@@ -57,6 +58,11 @@ public class PlayerLife : NetworkBehaviour {
 
 	private void BecomeVulnerable() {
 		this.isInvulnerable = false;
+	}
+
+	void DisplayGameOver(){
+		this.gameOverPanel.SetActive (true);
+		Destroy (this.gameObject);
 	}
 
 	void Respawn() {

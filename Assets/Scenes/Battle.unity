@@ -2621,7 +2621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &227800158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3888,7 +3888,7 @@ GameObject:
   - component: {fileID: 1166884310}
   - component: {fileID: 1166884309}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Results
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3938,13 +3938,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press any key to retry
+  m_Text: 'You Lose!
+
+'
 --- !u!222 &1166884310
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4020,7 +4022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1210211506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4107,14 +4109,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1308074145}
-  - component: {fileID: 1308074146}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1308074145
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4135,17 +4136,6 @@ RectTransform:
   m_AnchoredPosition: {x: -25.358482, y: 0.0000019073486}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1308074146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1308074144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f4ceb107e184f7da5ef590120f90c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1341259105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,7 +4300,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxPrefab: {fileID: 1729915384474316, guid: de09b19767362412092c9bd6ed7a41b3, type: 2}
-  item: {fileID: 1741362218851012, guid: e46938393e12e49dab224bfe3d8aa18a, type: 2}
+  itemFrefabs:
+  - {fileID: 1193934422725292, guid: 7c835c54177ec4a98b1295e19b8de076, type: 2}
+  - {fileID: 1741362218851012, guid: e46938393e12e49dab224bfe3d8aa18a, type: 2}
+  - {fileID: 1582469616470014, guid: 762404c9cb2be43c59d30093121ba9ab, type: 2}
+  - {fileID: 1722203773271204, guid: f1523de86d9dc40e58b07e930a076b2f, type: 2}
 --- !u!114 &1370380772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4985,7 +4979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2042407101
 MonoBehaviour:
   m_ObjectHideFlags: 0

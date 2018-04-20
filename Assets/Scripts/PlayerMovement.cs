@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class PlayerMovement : NetworkBehaviour {
 
-	[SerializeField]
 	private float speed;
 
 	[SerializeField]
@@ -18,8 +17,12 @@ public class PlayerMovement : NetworkBehaviour {
 	void Start(){
 		animator = GetComponent<Animator> ();
 	}
-
+		
 	void FixedUpdate () {
+
+
+		this.speed = GetComponent<PlayerStats> ().speed;
+
 		if (this.isLocalPlayer) {
 			float moveHorizontal = Input.GetAxis ("Horizontal");
 			float moveVertical = Input.GetAxis ("Vertical");
@@ -28,10 +31,10 @@ public class PlayerMovement : NetworkBehaviour {
 
 			float newVelocityX = 0f;
 			if (moveHorizontal < 0 && currentVelocity.x <= 0) {
-				newVelocityX = -speed;
+				newVelocityX = -this.speed;
 				animator.SetInteger ("DirectionX", -1);
 			} else if (moveHorizontal > 0 && currentVelocity.x >= 0) {
-				newVelocityX = speed;
+				newVelocityX = this.speed;
 				animator.SetInteger ("DirectionX", 1);
 			} else {
 				animator.SetInteger ("DirectionX", 0);
@@ -39,10 +42,10 @@ public class PlayerMovement : NetworkBehaviour {
 
 			float newVelocityY = 0f;
 			if (moveVertical < 0 && currentVelocity.y <= 0) {
-				newVelocityY = -speed;
+				newVelocityY = -this.speed;
 				animator.SetInteger ("DirectionY", -1);
 			} else if (moveVertical > 0 && currentVelocity.y >= 0) {
-				newVelocityY = speed;
+				newVelocityY = this.speed;
 				animator.SetInteger ("DirectionY", 1);
 			} else {
 				animator.SetInteger ("DirectionY", 0);

@@ -9,6 +9,7 @@ TagManager:
   - Box
   - Bomb
   - Character
+  - Explosion
   layers:
   - Default
   - TransparentFX

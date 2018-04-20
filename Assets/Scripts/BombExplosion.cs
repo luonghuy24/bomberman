@@ -11,14 +11,19 @@ public class BombExplosion : NetworkBehaviour {
 	[SerializeField]
 	private GameObject explosionPrefab;
 
-	[SerializeField]
-	private int explosionRange;
+
+	public GameObject player;
+
+	public int explosionRange;
 
 	[SerializeField]
 	private float explosionDuration;
 
 	void OnTriggerExit2D(Collider2D other) {
 		this.GetComponent<Collider2D>().isTrigger = false;
+	}
+
+	void Start(){
 	}
 
 	[Command]
@@ -31,6 +36,7 @@ public class BombExplosion : NetworkBehaviour {
 			CmdCreateExplosions (Vector2.right);
 			CmdCreateExplosions (Vector2.up);
 			CmdCreateExplosions (Vector2.down);
+			player.GetComponent<PlayerStats> ().currentBomb -= 1;
 			NetworkServer.Destroy (this.gameObject);
 		}
 	}
