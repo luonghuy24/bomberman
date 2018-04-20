@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61131360118225686}
   - component: {fileID: 95005510380584500}
   - component: {fileID: 114866581319573070}
+  - component: {fileID: 114718906083602512}
+  - component: {fileID: 114233845072132308}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Bomb
@@ -37,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1458421629211692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9060066, y: -1.9041864, z: -0.021448031}
+  m_LocalPosition: {x: -1.5499674, y: 1.6856349, z: -0.021448031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +87,59 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114233845072132308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458421629211692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114718906083602512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458421629211692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 199
+    i1: 212
+    i2: 185
+    i3: 64
+    i4: 150
+    i5: 62
+    i6: 244
+    i7: 62
+    i8: 137
+    i9: 77
+    i10: 110
+    i11: 150
+    i12: 104
+    i13: 51
+    i14: 181
+    i15: 58
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114866581319573070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -96,10 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0633e125464ee1a4821519a67d4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider2D: {fileID: 0}
   explosionPrefab: {fileID: 1994080466308178, guid: 783680bc3b7fd45ab835535c159723c4,
     type: 2}
-  explosionDuration: 1
   explosionRange: 2
+  explosionDuration: 1
 --- !u!212 &212323317180871314
 SpriteRenderer:
   m_ObjectHideFlags: 1

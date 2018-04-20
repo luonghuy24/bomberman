@@ -1,33 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BombExplosion : MonoBehaviour {
+public class BombExplosion : NetworkBehaviour {
+
+	[SerializeField]
+	private BoxCollider2D collider2D;
 
 	[SerializeField]
 	private GameObject explosionPrefab;
 
 	[SerializeField]
-	private float explosionDuration;
-
-	[SerializeField]
 	private int explosionRange;
 
-	public void Explode() {
-		GameObject explosion = Instantiate (explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
-		Destroy(explosion, this.explosionDuration);
-		CreateExplosions (Vector2.left);
-		CreateExplosions (Vector2.right);
-		CreateExplosions (Vector2.up);
-		CreateExplosions (Vector2.down);
-		Destroy (this.gameObject);
-	}
+	[SerializeField]
+	private float explosionDuration;
 
 	void OnTriggerExit2D(Collider2D other) {
 		this.GetComponent<Collider2D>().isTrigger = false;
 	}
 
-	private void CreateExplosions(Vector2 direction) {
+	[Command]
+	public void CmdExplode() {
+		if (NetworkServer.active) {
+			GameObject explosion = Instantiate (explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+			NetworkServer.Spawn (explosion);
+			Destroy(explosion, this.explosionDuration);
+			CmdCreateExplosions (Vector2.left);
+			CmdCreateExplosions (Vector2.right);
+			CmdCreateExplosions (Vector2.up);
+			CmdCreateExplosions (Vector2.down);
+			NetworkServer.Destroy (this.gameObject);
+		}
+	}
+
+	[Command]
+	private void CmdCreateExplosions(Vector2 direction) {
 		ContactFilter2D contactFilter = new ContactFilter2D ();
 
 		Vector2 explosionDimensions = explosionPrefab.GetComponent<SpriteRenderer> ().bounds.size;
@@ -37,13 +46,13 @@ public class BombExplosion : MonoBehaviour {
 			Physics2D.OverlapBox (explosionPosition, explosionDimensions, 0.0f, contactFilter, colliders);
 			bool foundBlockOrWall = false;
 			foreach (Collider2D collider in colliders) {
-				if (collider) {
+				if (collider) {					
 					foundBlockOrWall = collider.tag == "Wall" || collider.tag == "Box";
 					if (collider.tag == "Box") {
-						Destroy(collider.gameObject);
+						NetworkServer.Destroy(collider.gameObject);
 					}
-					if (foundBlockOrWall) { 
-						break; 
+					if (foundBlockOrWall) {
+						break;
 					}
 				}
 			}
@@ -51,6 +60,7 @@ public class BombExplosion : MonoBehaviour {
 				break;
 			}
 			GameObject explosion = Instantiate (explosionPrefab, explosionPosition, Quaternion.identity) as GameObject;
+			NetworkServer.Spawn (explosion);
 			Destroy(explosion, this.explosionDuration);
 			explosionPosition += (explosionDimensions.x * direction);
 		}

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerLife : MonoBehaviour {
+public class PlayerLife : NetworkBehaviour {
 
 	[SerializeField]
 	private int numberOfLives = 3;
@@ -17,31 +18,37 @@ public class PlayerLife : MonoBehaviour {
 
 	private List<GameObject> lifeImages;
 
-	[SerializeField]
-	private GameObject playerLivesGrid;
-
-	[SerializeField]
 	private GameObject gameOverPanel;
 
-	void Start() {
-//		GameObject playerLivesGrid = GameObject.Find ("PlayerLivesGrid");
+	private Vector2 initialPosition;
+	private int initialNumberOfLives;
 
-		this.lifeImages = new List<GameObject> ();
-		for (int lifeIndex = 0; lifeIndex < this.numberOfLives; ++lifeIndex) {
-			GameObject lifeImage = Instantiate (playerLifeImage, this.playerLivesGrid.transform) as GameObject;
-			this.lifeImages.Add (lifeImage);
+	void Start() {	
+		if (this.isLocalPlayer) {
+			this.initialPosition = this.transform.position;
+			this.initialNumberOfLives = this.numberOfLives;
+
+//			this.gameOverPanel = GameObject.Find ("GameOverPanel");
+//			this.gameOverPanel.SetActive (false);
+
+			GameObject playerLivesGrid = GameObject.Find ("PlayerLivesGrid");
+
+			this.lifeImages = new List<GameObject> ();
+			for (int lifeIndex = 0; lifeIndex < this.numberOfLives; ++lifeIndex) {
+				GameObject lifeImage = Instantiate (playerLifeImage, playerLivesGrid.transform) as GameObject;
+				this.lifeImages.Add (lifeImage);
+			}
 		}
 	}
 
 	public void LoseLife() {
-		if (!this.isInvulnerable) {
+		if (!this.isInvulnerable && this.isLocalPlayer) {
 			this.numberOfLives--;
 			GameObject lifeImage = this.lifeImages [this.lifeImages.Count - 1];
 			Destroy (lifeImage);
 			this.lifeImages.RemoveAt (this.lifeImages.Count - 1);
 			if (this.numberOfLives == 0) {
-				Destroy (this.gameObject);
-				this.gameOverPanel.SetActive (true);
+				Respawn ();
 			}
 			this.isInvulnerable = true;
 			Invoke ("BecomeVulnerable", this.invulnerabilityDuration); 
@@ -51,4 +58,19 @@ public class PlayerLife : MonoBehaviour {
 	private void BecomeVulnerable() {
 		this.isInvulnerable = false;
 	}
+
+	void Respawn() {
+		this.numberOfLives = this.initialNumberOfLives;
+
+		GameObject playerLivesGrid = GameObject.Find ("PlayerLivesGrid");
+
+		this.lifeImages = new List<GameObject> ();
+		for (int lifeIndex = 0; lifeIndex < this.numberOfLives; ++lifeIndex) {
+			GameObject lifeImage = Instantiate (playerLifeImage, playerLivesGrid.transform) as GameObject;
+			this.lifeImages.Add (lifeImage);
+		}
+
+		this.transform.position = this.initialPosition;
+	}
+
 }
