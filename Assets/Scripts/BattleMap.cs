@@ -8,6 +8,9 @@ public class BattleMap : NetworkBehaviour {
 	[SerializeField]
 	private GameObject boxPrefab;
 
+	[SerializeField]
+	private GameObject item;
+
 
 	private List<Vector2> boxPositions;
 
@@ -51,6 +54,12 @@ public class BattleMap : NetworkBehaviour {
 	[Command]
 	void CmdGenerateBoxes() {
 		if (NetworkServer.active) {
+
+
+			GameObject item = Instantiate(boxPrefab, new Vector3(Mathf.RoundToInt(-6), 
+				Mathf.RoundToInt(3), 0),
+				Quaternion.identity);
+			NetworkServer.Spawn (item);
 
 			for (int i = 0; i < 100; i++) {
 

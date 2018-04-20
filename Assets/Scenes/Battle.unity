@@ -4310,6 +4310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxPrefab: {fileID: 1729915384474316, guid: de09b19767362412092c9bd6ed7a41b3, type: 2}
+  item: {fileID: 1741362218851012, guid: e46938393e12e49dab224bfe3d8aa18a, type: 2}
 --- !u!114 &1370380772
 MonoBehaviour:
   m_ObjectHideFlags: 0
