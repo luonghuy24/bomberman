@@ -89,7 +89,7 @@ public class BattleMap : NetworkBehaviour {
 
 
 
-			for (int i = 0; i < 50; i++) {
+			for (int i = 0; i < 70; i++) {
 
 				int index = Random.Range (0, boxPositions.Count);
 
