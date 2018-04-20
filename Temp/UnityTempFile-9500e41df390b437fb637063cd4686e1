@@ -178,6 +178,8 @@
 -define:UNITY_EDITOR_OSX
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
+'Assets/Scripts/BombDropping.cs'
+'Assets/Scripts/BombExplosion.cs'
 'Assets/Scripts/PlayerMovement.cs'
 'Assets/Scripts/StartGame.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
